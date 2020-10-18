@@ -1,18 +1,20 @@
+/* eslint-disable prettier/prettier */
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
+      For a guide and recipes on how to configure / customize this project,
+      <br />check out the
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
         >vue-cli documentation</a
-      >.
+      >
+      .
     </p>
     <h3>Installed CLI Plugins</h3>
     <ul>
       <li>
         <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
+          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vues/cli-plugin-babel"
           target="_blank"
           rel="noopener"
           >babel</a
@@ -41,7 +43,7 @@
         <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
       </li>
       <li>
-        <a href="https://forum.vuejs.org" target="_blank" rel="noopener"
+        <a href="https://forum.vuejs.org" target="_blank" rel="noopene"
           >Forum</a
         >
       </li>
@@ -51,9 +53,7 @@
         >
       </li>
       <li>
-        <a href="https://twitter.com/vuejs" target="_blank" rel="noopener"
-          >Twitter</a
-        >
+        <a href="https://twitter.com/vuejs" target="_blank">Twitter</a>
       </li>
       <li>
         <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
@@ -62,9 +62,7 @@
     <h3>Ecosystem</h3>
     <ul>
       <li>
-        <a href="https://router.vuejs.org" target="_blank" rel="noopener"
-          >vue-router</a
-        >
+        <a href="https://router.vuejs.org">vue-router</a>
       </li>
       <li>
         <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a>
@@ -91,6 +89,7 @@
         >
       </li>
     </ul>
+    <a href="http://www.baidu.com" target="_blank" alt>baidu</a>
   </div>
 </template>
 
@@ -98,24 +97,28 @@
 export default {
   name: "HelloWorld",
   props: {
-    msg: String
-  }
+    msg: String,
+  },
 };
 </script>
+s
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }
