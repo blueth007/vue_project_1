@@ -1,14 +1,11 @@
 <template>
-    <div class>
-        myapp
-        <li>
-            <a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a>
-        </li>
+    <div class="home_container">
+        <h2>This is Home Page</h2>
     </div>
 </template>
 <script>
 export default {
-    name: "Myapp",
+    name: "Home",
     props: {},
     components: {},
     data() {
