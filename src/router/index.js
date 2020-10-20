@@ -19,6 +19,8 @@ const routes = [
     {
         path: "/home",
         component: Home,
+        redirect: "/users",
+        props: () => ({ defalutPath: "/users" }),
         children: [
             {
                 path: "/goods",

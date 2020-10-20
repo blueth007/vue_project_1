@@ -10,13 +10,18 @@
         <el-container>
             <!-- 侧边栏 -->
             <el-aside :width="isCollapse ? '64px' : '200px'">
-                <h2 @click="toggleCollapse()">Aside</h2>
+                <h2 @click="toggleCollapse()">
+                    <i class="el-icon-s-unfold" v-if="isCollapse"></i
+                    ><i class="el-icon-s-fold" v-if="!isCollapse"></i>
+                </h2>
                 <el-menu
                     unique-opened
-                    background-color="transparent"
+                    background-color="slategrey"
                     text-color="#fff"
                     active-text-color="#409bfe"
                     :collapse="isCollapse"
+                    :collapse-transition="false"
+                    :default-active="defalutPath"
                     router
                 >
                     <el-submenu :index="item.id + ''" :key="item.id" v-for="item in menulist">
@@ -47,7 +52,7 @@
 <script>
 export default {
     name: "Home",
-    props: {},
+    props: { defalutPath: String },
     components: {},
     data() {
         return {
@@ -60,7 +65,7 @@ export default {
     methods: {
         logout() {
             window.sessionStorage.clear();
-            this.$roter.push("/login");
+            this.$router.push("/login");
         },
         getMenuList() {
             this.$http.get("/menu").then(rest => {
