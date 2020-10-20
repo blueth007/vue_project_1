@@ -3,6 +3,12 @@ import VueRouter from "vue-router";
 import Login from "../components/Login.vue";
 // import Mypp from "../components/myApp.vue";
 import Home from "../components/Home.vue";
+import Users from "../components/users/Users.vue";
+import Goods from "../components/goods/Goods.vue";
+import Rights from "../components/rights/Rights.vue";
+import Orders from "../components/orders/Orders.vue";
+import Reports from "../components/reports/Reports.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -12,7 +18,29 @@ const routes = [
     },
     {
         path: "/home",
-        component: Home
+        component: Home,
+        children: [
+            {
+                path: "/goods",
+                component: Goods
+            },
+            {
+                path: "/users",
+                component: Users
+            },
+            {
+                path: "/orders",
+                component: Orders
+            },
+            {
+                path: "/rights",
+                component: Rights
+            },
+            {
+                path: "/reports",
+                component: Reports
+            }
+        ]
     },
     {
         path: "/login",

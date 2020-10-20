@@ -5,18 +5,39 @@
             <div class="avatar_box">
                 <img src="../assets/logo.png" alt="avatar" />
             </div>
-            <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="login_form">
+            <el-form
+                :model="loginForm"
+                status-icon
+                :rules="rules"
+                ref="loginForm"
+                label-width="100px"
+                class="login_form"
+            >
                 <el-form-item label="用户名" prop="username">
-                    <el-input v-model.trim="loginForm.username" autocomplete="off" prefix-icon="el-icon-user"></el-input>
+                    <el-input
+                        v-model.trim="loginForm.username"
+                        autocomplete="off"
+                        prefix-icon="el-icon-user"
+                    ></el-input>
                 </el-form-item>
                 <el-form-item label="密  码" prop="password">
-                    <el-input type="password" v-model.trim="loginForm.password" autocomplete="off" prefix-icon="el-icon-key" show-password></el-input>
+                    <el-input
+                        type="password"
+                        v-model.trim="loginForm.password"
+                        autocomplete="off"
+                        prefix-icon="el-icon-key"
+                        show-password
+                    ></el-input>
                 </el-form-item>
                 <el-form-item label="验证码" prop="ver_code">
                     <el-input v-model.number="loginForm.ver_code" clearable></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-checkbox label="记住密码" v-model="loginForm.rememberOn" name="rememberOn"></el-checkbox>
+                    <el-checkbox
+                        label="记住密码"
+                        v-model="loginForm.rememberOn"
+                        name="rememberOn"
+                    ></el-checkbox>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('loginForm')">登陆</el-button>
@@ -138,7 +159,7 @@ function ClearRemember(key) {
     }
     .login_box {
         width: 450px;
-        height: 330px;
+        height: 430px;
         border-radius: 5px;
         background-color: #fff;
         position: absolute;
@@ -150,7 +171,7 @@ function ClearRemember(key) {
     .avatar_box {
         position: absolute;
         left: 50%;
-        top: -50%;
+        bottom: 100%;
 
         width: 130px;
         height: 130px;
