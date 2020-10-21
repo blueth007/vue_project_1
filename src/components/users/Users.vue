@@ -63,11 +63,11 @@
             width="50%"
             :before-close="handleDialogClose"
         >
-            <EditUser :data="editorDalog.editRow"></EditUser>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="handleDialogClose">取 消</el-button>
-                <el-button type="primary" @click="handleDialogEnter">确 定</el-button>
-            </span>
+            <EditUser
+                :data="editorDalog.editRow"
+                @oncancel="handleDialogClose"
+                @onsave="handleDialogEnter"
+            ></EditUser>
         </el-dialog>
     </div>
 </template>
@@ -114,6 +114,7 @@ export default {
         },
         handleDelete(row) {
             console.log(row);
+            this.userlist = this.userlist.filter(el => el.mg_id != row.mg_id);
         },
         handleSizeChange(val) {
             console.log(`每页 ${val} 条`);
@@ -129,8 +130,15 @@ export default {
             console.log("close X");
             this.editorDalog.isVisible = false;
         },
-        handleDialogEnter() {
-            console.log("点击确定");
+        handleDialogEnter(val) {
+            console.log("点击确定返回值", val);
+            this.userlist = this.userlist.map(el => {
+                if (el.mg_id == val.mg_id) {
+                    return Object.assign({}, { ...el }, { ...val });
+                }
+                return el;
+            });
+
             this.editorDalog.isVisible = false;
         }
     },
