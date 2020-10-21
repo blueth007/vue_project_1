@@ -15,7 +15,9 @@ import {
     Menu,
     MenuItem,
     MenuItemGroup,
-    Submenu
+    Submenu,
+    Breadcrumb,
+    BreadcrumbItem
 } from "element-ui";
 
 Vue.use(Button);
@@ -33,5 +35,7 @@ Vue.use(Menu);
 Vue.use(Submenu);
 Vue.use(MenuItem);
 Vue.use(MenuItemGroup);
+Vue.use(Breadcrumb);
+Vue.use(BreadcrumbItem);
 
 Vue.prototype.$message = Message; //全局挂载

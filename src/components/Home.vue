@@ -29,7 +29,12 @@
                             <i :class="item.icon"></i>
                             <span slot="title">{{ item.authName }}</span>
                         </template>
-                        <el-menu-item :index="val.path" v-for="val in item.children" :key="val.id">
+                        <el-menu-item
+                            :index="val.path"
+                            v-for="val in item.children"
+                            :key="val.id"
+                            @click="saveNavState(val.path)"
+                        >
                             <template slot="title">
                                 <i class="el-icon-menu"></i>
                                 <span>{{ val.authName }}</span>
@@ -52,16 +57,28 @@
 <script>
 export default {
     name: "Home",
-    props: { defalutPath: String },
+    props: {},
     components: {},
     data() {
         return {
             menulist: [],
-            isCollapse: false
+            isCollapse: false,
+            defalutPath: "",
+            openMenus: []
         };
     },
     computed: {},
-    watch: {},
+    watch: {
+        $route(to) {
+            // console.log(to.path, from.path);
+            if (to.path == "/welcome") {
+                this.defalutPath = "";
+                window.sessionStorage.setItem("NavState", "");
+                return false;
+            }
+            this.defalutPath = to.path;
+        }
+    },
     methods: {
         logout() {
             window.sessionStorage.clear();
@@ -70,7 +87,7 @@ export default {
         getMenuList() {
             this.$http.get("/menu").then(rest => {
                 const data = rest.data;
-                console.log(data);
+                // console.log(data);
                 if (data.code !== 1) {
                     this.$message({
                         type: "error",
@@ -83,10 +100,16 @@ export default {
         },
         toggleCollapse() {
             this.isCollapse = !this.isCollapse;
-        }
+        },
+        saveNavState(path) {
+            this.defalutPath = path;
+            window.sessionStorage.setItem("NavState", path);
+        },
+        foldSubMenu() {} //折叠所有menu面板
     },
     created() {
         this.getMenuList();
+        this.defalutPath = window.sessionStorage.getItem("NavState");
     },
     mounted() {},
     beforeDestroy() {}

@@ -1,11 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../components/Login.vue";
-// import Mypp from "../components/myApp.vue";
+import Mypp from "../components/myApp.vue";
 import Home from "../components/Home.vue";
 import Users from "../components/users/Users.vue";
 import Goods from "../components/goods/Goods.vue";
+import Categories from "../components/goods/Categories.vue";
+import Params from "../components/goods/Params.vue";
 import Rights from "../components/rights/Rights.vue";
+import Roles from "../components/rights/Roles.vue";
 import Orders from "../components/orders/Orders.vue";
 import Reports from "../components/reports/Reports.vue";
 
@@ -14,17 +17,31 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: "/",
+        // component: Home
         redirect: "/home"
     },
+
     {
         path: "/home",
         component: Home,
-        redirect: "/users",
-        props: () => ({ defalutPath: "/users" }),
+        redirect: "/welcome",
+        // props: () => ({ defalutPath: "/users" }),
         children: [
+            {
+                path: "/welcome",
+                component: Mypp
+            },
             {
                 path: "/goods",
                 component: Goods
+            },
+            {
+                path: "/Categories",
+                component: Categories
+            },
+            {
+                path: "/params",
+                component: Params
             },
             {
                 path: "/users",
@@ -37,6 +54,10 @@ const routes = [
             {
                 path: "/rights",
                 component: Rights
+            },
+            {
+                path: "/roles",
+                component: Roles
             },
             {
                 path: "/reports",

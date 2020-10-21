@@ -1,9 +1,6 @@
 <template>
     <div class>
-        myapp
-        <li>
-            <a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a>
-        </li>
+        This is welcome Page
     </div>
 </template>
 <script>

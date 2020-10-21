@@ -1,16 +1,16 @@
 <template>
-    <div class="rights_container">
+    <div class="goods_container">
         <el-breadcrumb separator="/">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item>权限管理</el-breadcrumb-item>
-            <el-breadcrumb-item>权限列表</el-breadcrumb-item>
+            <el-breadcrumb-item>商品管理</el-breadcrumb-item>
+            <el-breadcrumb-item>参数列表</el-breadcrumb-item>
         </el-breadcrumb>
     </div>
 </template>
 
 <script>
 export default {
-    name: "Rights",
+    name: "Params",
     components: {},
     props: {},
     data() {
