@@ -57,7 +57,18 @@
             >
             </el-pagination>
         </el-card>
-        <EditUser :isVisible="editorDalog.isVisible" :row="editorDalog.editRow"></EditUser>
+        <el-dialog
+            title="提示"
+            :visible="editorDalog.isVisible"
+            width="50%"
+            :before-close="handleDialogClose"
+        >
+            <EditUser :data="editorDalog.editRow"></EditUser>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="handleDialogClose">取 消</el-button>
+                <el-button type="primary" @click="handleDialogEnter">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -113,6 +124,14 @@ export default {
             console.log(`当前页: ${val}`);
             this.queryInfo.pagenum = val;
             this.getUsers();
+        },
+        handleDialogClose() {
+            console.log("close X");
+            this.editorDalog.isVisible = false;
+        },
+        handleDialogEnter() {
+            console.log("点击确定");
+            this.editorDalog.isVisible = false;
         }
     },
     created() {

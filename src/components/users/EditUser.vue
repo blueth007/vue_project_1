@@ -1,17 +1,7 @@
 <template>
     <div class=" ">
-        <el-dialog
-            title="提示"
-            :visible.sync="dialogVisible"
-            width="50%"
-            :before-close="handleClose"
-        >
-            {{ row }}
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-            </span>
-        </el-dialog>
+        Editor
+        {{ data }}
     </div>
 </template>
 
@@ -19,25 +9,15 @@
 export default {
     name: "EditUser",
     components: {},
-    props: { isVisible: Boolean, row: Object },
+    props: { data: Object },
     data() {
-        return {
-            dialogVisible: this.isVisible
-        };
+        return {};
     },
     watch: {},
     computed: {},
-    methods: {
-        handleClose(done) {
-            this.$confirm("确认关闭？")
-                .then(() => {
-                    done();
-                })
-                .catch(() => {});
-        }
-    },
+    methods: {},
     created() {},
     mounted() {}
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="" scoped></style>
