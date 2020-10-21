@@ -5,13 +5,67 @@
             <el-breadcrumb-item>用户管理</el-breadcrumb-item>
             <el-breadcrumb-item>用户列表</el-breadcrumb-item>
         </el-breadcrumb>
+        <el-card class="box-card">
+            <template>
+                <el-table :data="userlist" border stripe style="width: 100%">
+                    <el-table-column
+                        type="index"
+                        width="60px"
+                        label="序号"
+                        align="center"
+                    ></el-table-column>
+                    <el-table-column prop="mg_name" label="姓名" width="120px" align="center">
+                    </el-table-column>
+                    <el-table-column prop="mg_email" label="邮件" width="180px" align="center">
+                    </el-table-column>
+                    <el-table-column prop="mg_mobile" label="电话" width="180px" align="center">
+                    </el-table-column>
+                    <el-table-column prop="role_id" label="角色" width="120px" align="center">
+                    </el-table-column>
+                    <el-table-column label="状态" width="100px" align="center">
+                        <template slot-scope="scope">
+                            <el-switch v-model="scope.row.mg_state"> </el-switch>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" align="center">
+                        <template slot-scope="scope">
+                            <el-button
+                                type="primary"
+                                icon="el-icon-edit"
+                                size="mini"
+                                @click="handleEdit(scope.row)"
+                            ></el-button>
+                            <el-button
+                                type="danger"
+                                icon="el-icon-delete"
+                                size="mini"
+                                @click="handleDelete(scope.row)"
+                            ></el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </template>
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="queryInfo.pagenum"
+                :page-sizes="[1, 2, 5, 10]"
+                :page-size="queryInfo.pagesize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="total"
+                :background="true"
+            >
+            </el-pagination>
+        </el-card>
+        <EditUser :isVisible="editorDalog.isVisible" :row="editorDalog.editRow"></EditUser>
     </div>
 </template>
 
 <script>
+import EditUser from "./EditUser.vue";
 export default {
     name: "Users",
-    components: {},
+    components: { EditUser },
     props: {},
     data() {
         return {
@@ -20,7 +74,12 @@ export default {
                 pagenum: 1,
                 pagesize: 2
             },
-            userlist: []
+            editorDalog: {
+                editRow: {},
+                isVisible: false
+            },
+            userlist: [],
+            total: 0
         };
     },
     watch: {},
@@ -34,7 +93,26 @@ export default {
                     return this.$message.error("获取用户信息失败");
                 }
                 this.userlist = res.data;
+                this.total = res.total;
             });
+        },
+        handleEdit(row) {
+            console.log(row);
+            this.editorDalog.editRow = row;
+            this.editorDalog.isVisible = true;
+        },
+        handleDelete(row) {
+            console.log(row);
+        },
+        handleSizeChange(val) {
+            console.log(`每页 ${val} 条`);
+            this.queryInfo.pagesize = val;
+            this.getUsers();
+        },
+        handleCurrentChange(val) {
+            console.log(`当前页: ${val}`);
+            this.queryInfo.pagenum = val;
+            this.getUsers();
         }
     },
     created() {
@@ -43,4 +121,12 @@ export default {
     mounted() {}
 };
 </script>
-<style lang="" scoped></style>
+<style lang="scss" scoped>
+.el-card {
+    margin-top: 20px;
+    min-width: 1024px;
+}
+.el-pagination {
+    margin-top: 10px;
+}
+</style>

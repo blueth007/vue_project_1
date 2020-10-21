@@ -17,7 +17,13 @@ import {
     MenuItemGroup,
     Submenu,
     Breadcrumb,
-    BreadcrumbItem
+    BreadcrumbItem,
+    Card,
+    Table,
+    TableColumn,
+    Switch,
+    Pagination,
+    Dialog
 } from "element-ui";
 
 Vue.use(Button);
@@ -37,5 +43,11 @@ Vue.use(MenuItem);
 Vue.use(MenuItemGroup);
 Vue.use(Breadcrumb);
 Vue.use(BreadcrumbItem);
+Vue.use(Card);
+Vue.use(Table);
+Vue.use(TableColumn);
+Vue.use(Switch);
+Vue.use(Pagination);
+Vue.use(Dialog);
 
 Vue.prototype.$message = Message; //全局挂载
