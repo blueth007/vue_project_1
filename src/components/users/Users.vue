@@ -6,6 +6,22 @@
             <el-breadcrumb-item>用户列表</el-breadcrumb-item>
         </el-breadcrumb>
         <el-card class="box-card">
+            <el-row :gutter="22">
+                <el-col :span="8">
+                    <el-input placeholder="请输入查询内容" v-model="queryInfo.query" clearable>
+                        <el-button
+                            type="primary"
+                            slot="append"
+                            icon="el-icon-search"
+                            @click="getUsers()"
+                            >搜索</el-button
+                        >
+                    </el-input>
+                </el-col>
+                <el-col :span="16"
+                    ><el-button @click="addUser()" type="primary">添加用户</el-button></el-col
+                >
+            </el-row>
             <template>
                 <el-table :data="userlist" border stripe style="width: 100%">
                     <el-table-column
@@ -24,7 +40,7 @@
                     </el-table-column>
                     <el-table-column label="状态" width="100px" align="center">
                         <template slot-scope="scope">
-                            <el-switch v-model="scope.row.mg_state"> </el-switch>
+                            <el-switch v-model="scope.row.mg_state" disabled> </el-switch>
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" align="center">
@@ -58,12 +74,13 @@
             </el-pagination>
         </el-card>
         <el-dialog
-            title="提示"
-            :visible="editorDalog.isVisible"
+            title="编辑框"
+            :visible.sync="editorDalog.isVisible"
             width="50%"
-            :before-close="handleDialogClose"
+            @close="handleDialogClose"
         >
             <EditUser
+                :type="editorDalog.type"
                 :data="editorDalog.editRow"
                 @oncancel="handleDialogClose"
                 @onsave="handleDialogEnter"
@@ -87,6 +104,7 @@ export default {
             },
             editorDalog: {
                 editRow: {},
+                type: "Edit",
                 isVisible: false
             },
             userlist: [],
@@ -107,9 +125,15 @@ export default {
                 this.total = res.total;
             });
         },
+        addUser() {
+            console.log("new");
+            this.editorDalog.isVisible = true;
+            this.editorDalog.type = "Add";
+        },
         handleEdit(row) {
             console.log(row);
             this.editorDalog.editRow = row;
+            this.editorDalog.type = "Edit";
             this.editorDalog.isVisible = true;
         },
         handleDelete(row) {
@@ -128,13 +152,19 @@ export default {
         },
         handleDialogClose() {
             console.log("close X");
+            this.editorDalog.editRow = {};
+
             this.editorDalog.isVisible = false;
         },
         handleDialogEnter(val) {
             console.log("点击确定返回值", val);
+            if (this.editorDalog.type == "Add") {
+                this.userlist.push(val);
+            }
+
             this.userlist = this.userlist.map(el => {
                 if (el.mg_id == val.mg_id) {
-                    return Object.assign({}, { ...el }, { ...val });
+                    return val;
                 }
                 return el;
             });
@@ -149,6 +179,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.el-row {
+    margin: 10px 0;
+}
 .el-card {
     margin-top: 20px;
     min-width: 1024px;
