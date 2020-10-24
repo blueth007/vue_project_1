@@ -73,7 +73,7 @@ export default {
             // console.log(to.path, from.path);
             if (to.path == "/welcome") {
                 this.defalutPath = "";
-                window.sessionStorage.setItem("NavState", "");
+                // window.sessionStorage.setItem("NavState", "");
                 return false;
             }
             this.defalutPath = to.path;
@@ -103,15 +103,17 @@ export default {
         },
         saveNavState(path) {
             this.defalutPath = path;
-            window.sessionStorage.setItem("NavState", path);
+            // window.sessionStorage.setItem("NavState", path);
         },
         foldSubMenu() {} //折叠所有menu面板
     },
     created() {
         this.getMenuList();
-        this.defalutPath = window.sessionStorage.getItem("NavState");
+        // this.defalutPath = window.sessionStorage.getItem("NavState");
     },
-    mounted() {},
+    mounted() {
+        this.defalutPath = this.$route.path;
+    },
     beforeDestroy() {}
 };
 </script>
