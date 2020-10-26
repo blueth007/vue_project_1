@@ -72,8 +72,8 @@ export default {
         $route(to) {
             // console.log(to.path, from.path);
             if (to.path == "/welcome") {
-                this.defalutPath = "";
-                window.sessionStorage.setItem("NavState", "");
+                this.defalutPath = "/welcome";
+
                 return false;
             }
             this.defalutPath = to.path;
@@ -109,9 +109,11 @@ export default {
     },
     created() {
         this.getMenuList();
-        this.defalutPath = window.sessionStorage.getItem("NavState");
+        this.defalutPath = this.$route.path;
     },
-    mounted() {},
+    mounted() {
+        this.defalutPath = this.$route.path;
+    },
     beforeDestroy() {}
 };
 </script>
