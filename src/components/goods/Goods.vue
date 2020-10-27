@@ -5,7 +5,7 @@
             <el-breadcrumb-item>商品管理</el-breadcrumb-item>
             <el-breadcrumb-item>商品列表</el-breadcrumb-item>
         </el-breadcrumb>
-        <p>只有get数据 没有edit和delete远程接口</p>
+        <p>只有get数据 没有edit和delete远程接口,以及搜索没有做正则匹配上搜索</p>
         <el-row :gutter="20">
             <el-col :span="8">
                 <el-input placeholder="请输入查询内容" v-model="queryInfo.search" clearable>
@@ -34,9 +34,9 @@
             </el-table-column>
             <el-table-column prop="goods_weight" label="商品重量(g)" width="120px" align="center">
             </el-table-column>
-            <el-table-column prop="add_time" label="创建时间" align="center">
+            <el-table-column label="创建时间" align="center">
                 <template slot-scope="dataTime">
-                    {{ dataTime.row.add_time }}
+                    {{ getFormatTime("yyyy-MM-dd hh:mm:ss", dataTime.row.add_time) }}
                 </template>
             </el-table-column>
             <el-table-column label="操作" width="180px" align="center">
@@ -73,7 +73,11 @@
             width="50%"
             @close="handleDialogClose"
         >
-            <EditGoods :data="editorDalog.editorData"></EditGoods>
+            <EditGoods
+                :data="editorDalog.editorData"
+                @oncancel="handleDialogClose"
+                @onsave="handleDialogSubmit"
+            ></EditGoods>
         </el-dialog>
     </div>
 </template>
@@ -99,6 +103,38 @@ export default {
     watch: {},
     computed: {},
     methods: {
+        getFormatTime(fmt, date) {
+            //除了 月份MM 其他全是小写字符
+
+            if (Object.prototype.toString.call(date) == "[object String]") {
+                date = new Date(date);
+            }
+            if (Object.prototype.toString.call(date) == "[object Number]") {
+                date = new Date(date);
+            }
+
+            var o = {
+                "M+": date.getMonth() + 1, //月份
+                "d+": date.getDate(), //日
+                "h+": date.getHours(), //小时
+                "m+": date.getMinutes(), //分
+                "s+": date.getSeconds(), //秒
+                "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+                S: date.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(
+                    RegExp.$1,
+                    (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+                );
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt))
+                    fmt = fmt.replace(
+                        RegExp.$1,
+                        RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
+                    );
+            return fmt;
+        },
         getGoods() {
             const loading = this.$loading({
                 target: ".el-table",
@@ -108,7 +144,6 @@ export default {
                 spinner: "el-icon-loading",
                 background: "rgba(0, 0, 0, 0.7)"
             });
-            console.log("LOAD:", loading);
             this.$http.get("/goods", { params: { ...this.queryInfo } }).then(res => {
                 const result = res.data;
                 console.log(result);
@@ -131,6 +166,7 @@ export default {
         },
         handleDelete(val) {
             console.log(val);
+            this.goodList = this.goodList.filter(ele => ele.goods_id != val.goods_id);
         },
         handlePageSizeChange(val) {
             this.queryInfo.pagesize = val;
@@ -144,6 +180,16 @@ export default {
         handleDialogClose() {
             this.editorDalog.isVisible = false;
             this.editorDalog.editorData = {};
+        },
+        handleDialogSubmit(val) {
+            this.handleDialogClose();
+            console.log(val);
+            this.goodList = this.goodList.map(ele => {
+                if (ele.goods_id == val.goods_id) {
+                    return val;
+                }
+                return ele;
+            });
         }
     },
     created() {
