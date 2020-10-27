@@ -103,7 +103,6 @@ export default {
         },
         saveNavState(path) {
             this.defalutPath = path;
-            window.sessionStorage.setItem("NavState", path);
         },
         foldSubMenu() {} //折叠所有menu面板
     },
