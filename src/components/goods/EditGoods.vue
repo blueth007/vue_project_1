@@ -1,6 +1,5 @@
 <template>
     <div class=" ">
-        {{ this.data }}
         <el-form :model="editor" label-width="100px">
             <el-form-item label="商品名称">
                 <el-input v-model="editor.goods_name"></el-input>
