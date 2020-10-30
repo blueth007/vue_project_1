@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import "./plugins/element.js";
 import "./assets/css/global.css";
+import base from "./assets/js/base"; //引用
 
 import axios from "axios";
 axios.defaults.baseURL =
@@ -12,6 +13,7 @@ axios.interceptors.request.use(config => {
     return config;
 });
 Vue.prototype.$http = axios;
+Vue.use(base); //将全局函数当做插件来进行注册
 Vue.config.productionTip = false;
 
 new Vue({

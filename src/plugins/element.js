@@ -26,7 +26,9 @@ import {
     Dialog,
     Tag,
     Row,
-    Col
+    Col,
+    Loading,
+    MessageBox
 } from "element-ui";
 
 Vue.use(Button);
@@ -55,5 +57,7 @@ Vue.use(Dialog);
 Vue.use(Tag);
 Vue.use(Row);
 Vue.use(Col);
+Vue.use(Loading);
 
 Vue.prototype.$message = Message; //全局挂载
+Vue.prototype.$confirm = MessageBox.confirm;
