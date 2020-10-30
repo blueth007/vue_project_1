@@ -34,7 +34,7 @@
             </el-table-column>
             <el-table-column prop="goods_weight" label="商品重量(g)" width="120px" align="center">
             </el-table-column>
-            <el-table-column label="创建时间" align="center">
+            <el-table-column label="创建时间" align="center" width="220px">
                 <template slot-scope="dataTime">
                     {{ getFormatTime("yyyy-MM-dd hh:mm:ss", dataTime.row.add_time) }}
                 </template>
