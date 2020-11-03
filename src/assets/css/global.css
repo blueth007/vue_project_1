@@ -6,3 +6,8 @@ body,
     padding: 0;
 
 }
+
+/* 在全局的global.css样式中给el-cascader-panel添加高度 */
+.el-cascader-panel {
+    height: 200px;
+}

@@ -28,7 +28,11 @@ import {
     Row,
     Col,
     Loading,
-    MessageBox
+    MessageBox,
+    Cascader,
+    Tooltip,
+    Timeline,
+    TimelineItem
 } from "element-ui";
 
 Vue.use(Button);
@@ -58,6 +62,10 @@ Vue.use(Tag);
 Vue.use(Row);
 Vue.use(Col);
 Vue.use(Loading);
+Vue.use(Cascader);
+Vue.use(Tooltip);
+Vue.use(Timeline);
+Vue.use(TimelineItem);
 
 Vue.prototype.$message = Message; //全局挂载
 Vue.prototype.$confirm = MessageBox.confirm;
