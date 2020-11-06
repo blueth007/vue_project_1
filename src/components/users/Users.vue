@@ -5,6 +5,7 @@
             <el-breadcrumb-item>用户管理</el-breadcrumb-item>
             <el-breadcrumb-item>用户列表</el-breadcrumb-item>
         </el-breadcrumb>
+        <p>远程只有获取数据,本地提供增加和修改删除,没有提交到远程接口</p>
         <el-card class="box-card">
             <el-row :gutter="22">
                 <el-col :span="8">
