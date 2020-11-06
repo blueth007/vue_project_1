@@ -35,7 +35,7 @@ import {
     Tooltip,
     Timeline,
     TimelineItem,
-    Tree,
+    Tree
 } from "element-ui";
 
 Vue.use(Button);
@@ -64,7 +64,6 @@ Vue.use(Dialog);
 Vue.use(Tag);
 Vue.use(Row);
 Vue.use(Col);
-<<<<<<< HEAD
 Vue.use(Loading);
 Vue.use(Cascader);
 Vue.use(Tabs);
@@ -72,9 +71,7 @@ Vue.use(TabPane);
 Vue.use(Tooltip);
 Vue.use(Timeline);
 Vue.use(TimelineItem);
-=======
 Vue.use(Tree);
->>>>>>> rights
 
 Vue.prototype.$message = Message; //全局挂载
 Vue.prototype.$confirm = MessageBox.confirm;
