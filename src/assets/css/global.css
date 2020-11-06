@@ -6,3 +6,8 @@ body,
     padding: 0;
 
 }
+
+/* 表格动态选择颜色 */
+.el-table .table-select {
+    background: #b9daa7;
+}

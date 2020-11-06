@@ -26,7 +26,11 @@ import {
     Dialog,
     Tag,
     Row,
-    Col
+    Col,
+    Loading,
+    Cascader,
+    Tabs,
+    TabPane
 } from "element-ui";
 
 Vue.use(Button);
@@ -55,5 +59,9 @@ Vue.use(Dialog);
 Vue.use(Tag);
 Vue.use(Row);
 Vue.use(Col);
+Vue.use(Loading);
+Vue.use(Cascader);
+Vue.use(Tabs);
+Vue.use(TabPane);
 
 Vue.prototype.$message = Message; //全局挂载
