@@ -103,20 +103,13 @@ export default {
         },
         saveNavState(path) {
             this.defalutPath = path;
-<<<<<<< HEAD
-=======
             // window.sessionStorage.setItem("NavState", path);
->>>>>>> rights
         },
         foldSubMenu() {} //折叠所有menu面板
     },
     created() {
         this.getMenuList();
-<<<<<<< HEAD
         this.defalutPath = this.$route.path;
-=======
-        // this.defalutPath = window.sessionStorage.getItem("NavState");
->>>>>>> rights
     },
     mounted() {
         this.defalutPath = this.$route.path;
