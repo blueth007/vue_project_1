@@ -30,7 +30,11 @@ import {
     Loading,
     Cascader,
     Tabs,
-    TabPane
+    TabPane,
+    MessageBox,
+    Tooltip,
+    Timeline,
+    TimelineItem
 } from "element-ui";
 
 Vue.use(Button);
@@ -63,5 +67,9 @@ Vue.use(Loading);
 Vue.use(Cascader);
 Vue.use(Tabs);
 Vue.use(TabPane);
+Vue.use(Tooltip);
+Vue.use(Timeline);
+Vue.use(TimelineItem);
 
 Vue.prototype.$message = Message; //全局挂载
+Vue.prototype.$confirm = MessageBox.confirm;
