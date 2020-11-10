@@ -49,7 +49,7 @@
 </template>
 <script>
 export default {
-    name: "",
+    name: "Login",
     props: {},
     components: {},
     data() {

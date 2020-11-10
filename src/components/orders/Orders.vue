@@ -196,7 +196,8 @@
 
 <script>
 //支付方式 0 未支付 1 支付宝 2 微信 3 银行卡
-import cities from "./cities.json";
+//数据太大 需要网络请求
+//import cities from "./cities.json";
 
 export default {
     name: "Orders",
@@ -319,31 +320,35 @@ export default {
     created() {
         this.getOrders();
         let arr = [];
-        cities.provinces.province.map(pro => {
-            let p1 = {
-                label: pro.ssqname,
-                value: pro.ssqname
-            };
-            if (pro.cities) {
-                p1.children = [];
-                pro.cities.city.map(ct => {
-                    let p2 = {
-                        label: ct.ssqname,
-                        value: ct.ssqname
-                    };
-                    if (ct.areas) {
-                        p2.children = [];
-                        p2.children = ct.areas.area.map(ar => {
-                            return {
-                                label: ar.ssqname,
-                                value: ar.ssqname
-                            };
-                        });
-                    }
-                    p1.children.push(p2);
-                });
-            }
-            arr.push(p1);
+        this.$http.get("/cities").then(rest => {
+            const cities = rest.data;
+
+            cities.provinces.province.map(pro => {
+                let p1 = {
+                    label: pro.ssqname,
+                    value: pro.ssqname
+                };
+                if (pro.cities) {
+                    p1.children = [];
+                    pro.cities.city.map(ct => {
+                        let p2 = {
+                            label: ct.ssqname,
+                            value: ct.ssqname
+                        };
+                        if (ct.areas) {
+                            p2.children = [];
+                            p2.children = ct.areas.area.map(ar => {
+                                return {
+                                    label: ar.ssqname,
+                                    value: ar.ssqname
+                                };
+                            });
+                        }
+                        p1.children.push(p2);
+                    });
+                }
+                arr.push(p1);
+            });
         });
         this.provinceCities = arr;
     },
