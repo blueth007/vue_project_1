@@ -11,7 +11,8 @@ import Rights from "../components/rights/Rights.vue";
 import Roles from "../components/rights/Roles.vue";
 import Orders from "../components/orders/Orders.vue";
 import Reports from "../components/reports/Reports.vue";
-
+import Vuex from "../views/Vuex.vue";
+import TodoList from "../views/TodoList.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -62,12 +63,20 @@ const routes = [
             {
                 path: "/reports",
                 component: Reports
+            },
+            {
+                path: "/todolist",
+                component: TodoList
             }
         ]
     },
     {
         path: "/login",
         component: Login
+    },
+    {
+        path: "/vuex",
+        component: Vuex
     }
 ];
 

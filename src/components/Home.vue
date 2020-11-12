@@ -51,7 +51,12 @@
             </el-container>
         </el-container>
         <!-- 底部区域 -->
-        <el-footer>Footer</el-footer>
+        <el-footer
+            ><div>
+                Footer
+                <router-link to="/vuex">Vuex</router-link>
+            </div>
+        </el-footer>
     </el-container>
 </template>
 <script>

@@ -4,7 +4,7 @@ import router from "./router";
 import "./plugins/element.js";
 import "./assets/css/global.css";
 import base from "./assets/js/base"; //引用
-
+import store from "./store";
 import axios from "axios";
 
 //增加头部进度条 nprogress 组件
@@ -31,5 +31,6 @@ Vue.config.productionTip = false;
 
 new Vue({
     router,
+    store,
     render: h => h(App)
 }).$mount("#app");
