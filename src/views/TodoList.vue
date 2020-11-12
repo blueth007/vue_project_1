@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
     name: "TodoList",
     components: {},
@@ -106,11 +106,14 @@ export default {
             return this.$store.state.todolist;
         },
         unCompleted() {
-            return this.$store.state.todolist.filter(it => !it.completed);
+            return this.$store.getters.unCompleted;
+            //or return this.$store.state.todolist.filter(it => !it.completed);
         },
-        Compalted() {
-            return this.$store.state.todolist.filter(it => it.completed);
-        }
+        ...mapGetters(["Compalted"])
+        // Compalted() {
+        //     return this.$store.getters.Compalted;
+        //     //or return this.$store.state.todolist.filter(it => it.completed);
+        // }
     },
     methods: {
         ...mapActions(["AsyncTodoList"]),

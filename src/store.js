@@ -77,6 +77,12 @@ export default new Vuex.Store({
         //对store变量的另外加工,不会改变state的值
         big(state) {
             return "返回的值是大值+5后:< " + (state.count - 0 + 5) + " >";
+        },
+        unCompleted(state) {
+            return state.todolist.filter(it => !it.completed);
+        },
+        Compalted(state) {
+            return state.todolist.filter(it => it.completed);
         }
     }
 });
