@@ -1,6 +1,6 @@
 <template>
     <div class=" ">
-        <h3>使用store.state.count获取store的值:{{ $store.state.count }}</h3>
+        <h3>使用store.state.count获取store的值:{{ $store.state.example.count }}</h3>
         <button @click="handleAdd">+1</button>
         传递参数
         <button @click="handleAddN">+N(5)</button>
@@ -17,9 +17,11 @@
         <button @click="handleAsyncsub">异步+1</button>
         <button @click="handleAsyncsubN">异步+N(5)</button>
         getters的方法
-        <p>{{ $store.getters.big }}</p>
+        <!-- <p>{{ $store.getters.big }}</p> -->
         mapgetters的引入
-        <p>{{ big }}</p>
+        <p>
+            <strong>sss:{{ big }}</strong>
+        </p>
     </div>
 </template>
 
@@ -34,20 +36,22 @@ export default {
     },
     watch: {},
     computed: {
-        ...mapState(["count"]), //获取store->state-->count的值
-        ...mapGetters(["big"])
+        ...mapState("example", {
+            count: state => state.count
+        }),
+        ...mapGetters("example", ["big"])
     },
     methods: {
-        ...mapMutations(["sub", "subN"]),
-        ...mapActions(["AsyncAdd", "AsyncAddN"]),
+        ...mapMutations("example", ["sub", "subN"]),
+        ...mapActions("example", ["AsyncAdd", "AsyncAddN"]),
         handleAdd() {
-            this.$store.commit("add");
+            this.$store.commit("example/add");
         },
         handleDesc() {
-            this.$store.commit("desc");
+            this.$store.commit("example/desc");
         },
         handleAddN() {
-            this.$store.commit("addN", 5);
+            this.$store.commit("example/addN", 5);
         },
         handlesub() {
             this.sub();
@@ -56,10 +60,10 @@ export default {
             this.subN(5);
         },
         handleAsync() {
-            this.$store.dispatch("AsyncAdd");
+            this.$store.dispatch("example/AsyncAdd");
         },
         handleAsyncN() {
-            this.$store.dispatch("AsyncAddN", 5);
+            this.$store.dispatch("example/AsyncAddN", 5);
         },
         handleAsyncsub() {
             this.AsyncAdd();

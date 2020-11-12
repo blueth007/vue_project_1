@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
     name: "TodoList",
     components: {},
@@ -102,32 +102,31 @@ export default {
     },
     watch: {},
     computed: {
-        todolist() {
-            return this.$store.state.todolist;
-        },
+        ...mapState("todolist", {
+            todolist: state => state.todolist
+        }),
         unCompleted() {
-            return this.$store.getters.unCompleted;
-            //or return this.$store.state.todolist.filter(it => !it.completed);
+            // console.log("store:", this.$store);
+            return this.$store.getters["todolist/unCompleted"];
         },
-        ...mapGetters(["Compalted"])
-        // Compalted() {
-        //     return this.$store.getters.Compalted;
-        //     //or return this.$store.state.todolist.filter(it => it.completed);
-        // }
+        ...mapGetters("todolist", ["Compalted"])
     },
     methods: {
-        ...mapActions(["AsyncTodoList"]),
+        ...mapActions("todolist", ["AsyncTodoList"]),
 
         handleChecked(value) {
             //console.log("CHANGE", value);
-            this.$store.commit("changeTodolist", { ...value, completed: !value.completed });
+            this.$store.commit("todolist/changeTodolist", {
+                ...value,
+                completed: !value.completed
+            });
         },
         handleCheckedCitiesChange() {
             // console.log(this.Compalted.map(it => it.item));
             this.checkedCities = this.Compalted.map(it => it.item);
         },
         handleDeleteItem(value) {
-            this.$store.commit("changeTodolist", { ...value, deleted: true });
+            this.$store.commit("todolist/changeTodolist", { ...value, deleted: true });
         },
         handleAdd() {
             const newV = {
@@ -136,7 +135,7 @@ export default {
                 deleted: false,
                 completed: false
             };
-            this.$store.commit("addTodoList", newV);
+            this.$store.commit("todolist/addTodoList", newV);
             this.newItem = "";
         }
     },
